@@ -9,5 +9,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_note_create">NoteCreate</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="note_create">Add</string>
+    <string name="note_save">Save</string>
 
 </resources>
