@@ -13,5 +13,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="note_create">Add</string>
     <string name="note_save">Save</string>
+    <string name="note_add_photo">Photo</string>
+    <string name="note_add_record">record</string>
+    <string name="image_thumbnail">thumbnail</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="no_access_camera">Can\'t access camera</string>
 
 </resources>

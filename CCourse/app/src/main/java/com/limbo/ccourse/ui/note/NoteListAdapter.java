@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.limbo.ccourse.R;
@@ -49,18 +50,23 @@ public class NoteListAdapter extends BaseAdapter {
         if (convertView == null) {
             noteListItem = new NoteListItem();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.fragment_note_list_item, null);
-            noteListItem.mTextView = (TextView) convertView.findViewById(R.id.text_view_note_item_content);
-            noteListItem.mTextView.setText(mNoteList.get(position).getContent());
+            noteListItem.mTextViewTitle = (TextView) convertView.findViewById(R.id.text_view_note_item_title);
+            noteListItem.mTextViewContent = (TextView) convertView.findViewById(R.id.text_view_note_item_content);
+            noteListItem.mTextViewTitle.setText(mNoteList.get(position).getTitle());
+            noteListItem.mTextViewContent.setText(mNoteList.get(position).getContent());
             convertView.setTag(noteListItem);
         } else {
             noteListItem = (NoteListItem) convertView.getTag();
-            noteListItem.mTextView.setText(mNoteList.get(position).getContent());
+            noteListItem.mTextViewTitle.setText(mNoteList.get(position).getTitle());
+            noteListItem.mTextViewContent.setText(mNoteList.get(position).getContent());
         }
 
         return convertView;
     }
 
     class NoteListItem {
-        public TextView mTextView;
+        public TextView mTextViewTitle;
+        public TextView mTextViewContent;
+        public ImageView mImageView;
     }
 }

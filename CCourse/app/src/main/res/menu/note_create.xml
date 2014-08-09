@@ -2,6 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.limbo.ccourse.ui.note.NoteCreateActivity" >
+
+    <item android:id="@+id/action_note_add_record"
+        android:title="@string/note_add_record"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_note_add_photo"
+          android:title="@string/note_add_photo"
+          app:showAsAction="always" />
+
     <item android:id="@+id/action_note_save"
         android:title="@string/note_save"
         app:showAsAction="always" />

@@ -16,6 +16,8 @@ public class Note {
 
     private Long id;
     /** Not-null value. */
+    private String title;
+    /** Not-null value. */
     private String content;
     /** Not-null value. */
     private java.util.Date create_at;
@@ -38,8 +40,9 @@ public class Note {
         this.id = id;
     }
 
-    public Note(Long id, String content, java.util.Date create_at, java.util.Date update_at) {
+    public Note(Long id, String title, String content, java.util.Date create_at, java.util.Date update_at) {
         this.id = id;
+        this.title = title;
         this.content = content;
         this.create_at = create_at;
         this.update_at = update_at;
@@ -57,6 +60,16 @@ public class Note {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /** Not-null value. */
+    public String getTitle() {
+        return title;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /** Not-null value. */

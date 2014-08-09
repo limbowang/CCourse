@@ -40,6 +40,7 @@ public class DbGenerator {
         Entity entityNote = schema.addEntity("Note");
 
         entityNote.addIdProperty();
+        entityNote.addStringProperty("title").notNull();
         entityNote.addStringProperty("content").notNull();
         entityNote.addDateProperty("create_at").notNull();
         entityNote.addDateProperty("update_at");
