@@ -3,8 +3,11 @@
     package="com.limbo.ccourse" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -29,6 +32,10 @@
         <activity
             android:name=".ui.camera.CameraActivity"
             android:label="@string/title_activity_camera" >
+        </activity>
+        <activity
+            android:name=".ui.note.NoteViewActivity"
+            android:label="@string/title_activity_note_view" >
         </activity>
     </application>
 

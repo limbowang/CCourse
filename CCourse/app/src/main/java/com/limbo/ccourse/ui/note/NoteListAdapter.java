@@ -1,6 +1,8 @@
 package com.limbo.ccourse.ui.note;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.limbo.ccourse.R;
 import com.limbo.ccourse.persistence.db.model.Note;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +37,7 @@ public class NoteListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Note getItem(int position) {
         return mNoteList.get(position);
     }
 
@@ -52,13 +55,22 @@ public class NoteListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.fragment_note_list_item, null);
             noteListItem.mTextViewTitle = (TextView) convertView.findViewById(R.id.text_view_note_item_title);
             noteListItem.mTextViewContent = (TextView) convertView.findViewById(R.id.text_view_note_item_content);
+            noteListItem.mImageView = (ImageView) convertView.findViewById(R.id.image_thumbnail);
             noteListItem.mTextViewTitle.setText(mNoteList.get(position).getTitle());
-            noteListItem.mTextViewContent.setText(mNoteList.get(position).getContent());
+            noteListItem.mTextViewContent.setText(mNoteList.get(position).getDescription());
+            String thumbnail = mNoteList.get(position).getThumbnail();
+            if (thumbnail != null && new File(thumbnail).isFile()) {
+                noteListItem.mImageView.setImageDrawable(Drawable.createFromPath(thumbnail));
+            }
             convertView.setTag(noteListItem);
         } else {
             noteListItem = (NoteListItem) convertView.getTag();
             noteListItem.mTextViewTitle.setText(mNoteList.get(position).getTitle());
-            noteListItem.mTextViewContent.setText(mNoteList.get(position).getContent());
+            noteListItem.mTextViewContent.setText(mNoteList.get(position).getDescription());
+            String thumbnail = mNoteList.get(position).getThumbnail();
+            if (thumbnail != null && new File(thumbnail).isFile()) {
+                noteListItem.mImageView.setImageDrawable(Drawable.createFromPath(thumbnail));
+            }
         }
 
         return convertView;

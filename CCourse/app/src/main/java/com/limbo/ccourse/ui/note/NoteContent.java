@@ -1,17 +1,12 @@
 package com.limbo.ccourse.ui.note;
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.limbo.ccourse.persistence.db.dao.DaoMaster;
-import com.limbo.ccourse.persistence.db.dao.DaoSession;
 import com.limbo.ccourse.persistence.db.dao.NoteDao;
 import com.limbo.ccourse.persistence.db.model.Note;
-import com.limbo.ccourse.utils.db.DbUtil;
+import com.limbo.ccourse.utils.DbUtil;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,23 +29,40 @@ public class NoteContent {
      */
     private static Map<Long, Note> itemMap = new HashMap<Long, Note>();
 
-    public static List<Note> getItems() {
-        return items;
+    public static void addItem(Activity activity, Note note) {
+        NoteDao noteDao = DbUtil.getWritableSession(activity).getNoteDao();
+        noteDao.insert(note);
+        items.add(note);
+        itemMap.put(note.getId(), note);
     }
 
-    public static void addItem(Note item) {
-        items.add(item);
-        itemMap.put(item.getId(), item);
+    public static List<Note> getItems() {
+        return items;
     }
 
     public static Note getItem(Long id) {
         return itemMap.get(id);
     }
 
+    public static void updateItem(Activity activity, Note note) {
+        NoteDao noteDao = DbUtil.getWritableSession(activity).getNoteDao();
+        noteDao.update(note);
+        itemMap.put(note.getId(), note);
+    }
+
+    public static void deleteItem(Activity activity, long id) {
+        NoteDao noteDao = DbUtil.getWritableSession(activity).getNoteDao();
+        noteDao.delete(itemMap.get(id));
+        items.remove(itemMap.get(id));
+        itemMap.remove(id);
+    }
+
     public static void load(Activity activity, int n) {
-        // insert db
         NoteDao noteDao = DbUtil.getReadableSession(activity).getNoteDao();
         items = noteDao.loadAll();
+        for(Note item : items) {
+            itemMap.put(item.getId(), item);
+        }
     }
 
 }

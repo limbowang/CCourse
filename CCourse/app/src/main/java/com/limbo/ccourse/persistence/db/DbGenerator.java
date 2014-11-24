@@ -41,7 +41,9 @@ public class DbGenerator {
 
         entityNote.addIdProperty();
         entityNote.addStringProperty("title").notNull();
-        entityNote.addStringProperty("content").notNull();
+        entityNote.addStringProperty("description");
+        entityNote.addStringProperty("thumbnail");
+        entityNote.addStringProperty("content");
         entityNote.addDateProperty("create_at").notNull();
         entityNote.addDateProperty("update_at");
     }

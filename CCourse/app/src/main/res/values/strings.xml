@@ -13,10 +13,17 @@
     <string name="hello_world">Hello world!</string>
     <string name="note_create">Add</string>
     <string name="note_save">Save</string>
+    <string name="note_edit">Edit</string>
+    <string name="note_delete">Delete</string>
     <string name="note_add_photo">Photo</string>
     <string name="note_add_record">record</string>
     <string name="image_thumbnail">thumbnail</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="no_access_camera">Can\'t access camera</string>
+    <string name="title_activity_note_view">NoteViewActivity</string>
+    <string name="exit_waring">Are you sure to quit?</string>
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

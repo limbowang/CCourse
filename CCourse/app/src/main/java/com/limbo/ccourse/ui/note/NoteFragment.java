@@ -1,6 +1,9 @@
 package com.limbo.ccourse.ui.note;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +15,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.limbo.ccourse.R;
+import com.limbo.ccourse.persistence.db.model.Note;
 
-public class NoteFragment extends Fragment implements AbsListView.OnItemClickListener {
+import static android.app.AlertDialog.*;
+import static android.widget.AdapterView.OnItemClickListener;
+
+public class NoteFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,7 +66,9 @@ public class NoteFragment extends Fragment implements AbsListView.OnItemClickLis
         mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        mListView.setOnItemClickListener(new NoteListClickListener());
+        mListView.setOnItemLongClickListener(new NoteListLongClickListener());
+
 
         return view;
     }
@@ -79,16 +88,6 @@ public class NoteFragment extends Fragment implements AbsListView.OnItemClickLis
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(String.valueOf(NoteContent.getItems().get(position).getId()));
-        }
     }
 
     /**
@@ -121,5 +120,45 @@ public class NoteFragment extends Fragment implements AbsListView.OnItemClickLis
 
     public void updateNoteList() {
         mAdapter.notifyDataSetChanged();
+    }
+
+
+    class NoteListClickListener implements OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (null != mListener) {
+                // Notify the active callbacks interface (the activity, if the
+                // fragment is attached to one) that an item has been selected.
+                long noteId = mAdapter.getItemId(position);
+                Intent intent = new Intent(getActivity(), NoteViewActivity.class);
+                intent.putExtra("id", noteId);
+                startActivity(intent);
+            }
+        }
+    }
+
+    class NoteListLongClickListener implements AdapterView.OnItemLongClickListener {
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            final String[] ops = {
+                    getString(R.string.note_delete),
+                    getString(R.string.note_edit)
+            };
+
+            final long noteId = mAdapter.getItem(position).getId();
+
+            Builder builder = new Builder(getActivity())
+                    .setItems(ops, new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (ops[which].equals(getString(R.string.note_delete))) {
+                                NoteContent.deleteItem(getActivity(), noteId);
+                            }
+                        }
+                    });
+
+            return false;
+        }
     }
 }

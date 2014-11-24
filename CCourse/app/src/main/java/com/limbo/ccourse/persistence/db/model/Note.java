@@ -17,7 +17,8 @@ public class Note {
     private Long id;
     /** Not-null value. */
     private String title;
-    /** Not-null value. */
+    private String description;
+    private String thumbnail;
     private String content;
     /** Not-null value. */
     private java.util.Date create_at;
@@ -40,9 +41,11 @@ public class Note {
         this.id = id;
     }
 
-    public Note(Long id, String title, String content, java.util.Date create_at, java.util.Date update_at) {
+    public Note(Long id, String title, String description, String thumbnail, String content, java.util.Date create_at, java.util.Date update_at) {
         this.id = id;
         this.title = title;
+        this.description = description;
+        this.thumbnail = thumbnail;
         this.content = content;
         this.create_at = create_at;
         this.update_at = update_at;
@@ -72,12 +75,26 @@ public class Note {
         this.title = title;
     }
 
-    /** Not-null value. */
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
     public String getContent() {
         return content;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setContent(String content) {
         this.content = content;
     }

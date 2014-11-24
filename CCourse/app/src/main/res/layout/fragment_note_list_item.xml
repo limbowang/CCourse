@@ -23,7 +23,6 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:contentDescription="@string/image_thumbnail"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/photo_default"/>
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>
