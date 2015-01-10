@@ -30,10 +30,6 @@
             android:label="@string/title_activity_note_create" >
         </activity>
         <activity
-            android:name=".ui.camera.CameraActivity"
-            android:label="@string/title_activity_camera" >
-        </activity>
-        <activity
             android:name=".ui.note.NoteViewActivity"
             android:label="@string/title_activity_note_view" >
         </activity>
