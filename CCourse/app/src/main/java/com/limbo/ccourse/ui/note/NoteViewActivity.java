@@ -71,6 +71,9 @@ public class NoteViewActivity extends ActionBarActivity {
             mTextViewNoteContent.setText("");
             mTextViewNoteContent.append(StringUtil.getSpannedFromString(note.getContent()));
         }
+    }
+
+    protected void switchFragment(int i) {
 
     }
 }

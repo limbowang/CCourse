@@ -1,38 +1,32 @@
 package com.limbo.ccourse.ui.note;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.SpannedString;
 import android.text.style.ImageSpan;
-import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.limbo.ccourse.R;
-import com.limbo.ccourse.persistence.db.dao.NoteDao;
 import com.limbo.ccourse.persistence.db.model.Note;
-import com.limbo.ccourse.utils.DbUtil;
+import com.limbo.ccourse.utils.ActivityCode;
 import com.limbo.ccourse.utils.StringUtil;
 
 import java.io.File;
 import java.util.Date;
 
-import static android.app.AlertDialog.*;
-import static com.limbo.ccourse.ui.ActivityCode.*;
+import static android.app.AlertDialog.Builder;
+import static android.app.AlertDialog.OnClickListener;
 
 public class NoteCreateActivity extends ActionBarActivity {
 
@@ -47,6 +41,13 @@ public class NoteCreateActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_create);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mEditTextTitle = (EditText) findViewById(R.id.edit_text_note_title);
         mEditTextContent = (EditText) findViewById(R.id.edit_text_note_content);
 
@@ -117,7 +118,9 @@ public class NoteCreateActivity extends ActionBarActivity {
             File file = new File(mLastPhotoPath);
             Uri uri = Uri.fromFile(file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            startActivityForResult(intent, CAMERA_CAPTURE_START);
+            startActivityForResult(intent, ActivityCode.CAMERA_CAPTURE_START);
+        } else if (id == android.R.id.home) {
+            alertWhenExit();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -126,7 +129,7 @@ public class NoteCreateActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case CAMERA_CAPTURE_START:
+            case ActivityCode.CAMERA_CAPTURE_START:
                 if (data == null) {
                     ImageSpan imageSpan = new ImageSpan(NoteCreateActivity.this,
                             Uri.fromFile(new File(mLastPhotoPath)));
@@ -151,7 +154,7 @@ public class NoteCreateActivity extends ActionBarActivity {
                 .setTitle("Warning")
                 .setIcon(android.R.attr.alertDialogIcon)
                 .setMessage(R.string.exit_waring)
-                .setPositiveButton(R.string.answer_yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.answer_yes, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         NoteCreateActivity.this.finish();

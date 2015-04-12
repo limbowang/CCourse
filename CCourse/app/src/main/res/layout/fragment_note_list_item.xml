@@ -3,19 +3,23 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
+                android:padding="8dp"
                 tools:context=".ui.main.NoteFragment">
 
     <TextView
         android:id="@+id/text_view_note_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="64dp"/>
+        android:paddingRight="64dp"
+        android:paddingTop="4dp"/>
 
     <TextView
         android:id="@+id/text_view_note_item_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingRight="64dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:layout_below="@id/text_view_note_item_title"/>
 
     <ImageView
